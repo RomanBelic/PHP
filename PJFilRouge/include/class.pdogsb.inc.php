@@ -128,7 +128,6 @@ class PdoGsb{
 			COMMIT;
 			";
 			PdoGsb::$monPdo->exec($req);
-			echo $req;
 	}
     
 	public function getUserTypes () {
@@ -140,6 +139,23 @@ class PdoGsb{
 		}
 	    return $resultat;
 	}
+	
+	public function updateAnnonce ($idAnnonce, $Libelle, $Description, $Prix, $Logo) {
+		$req = "Update annonce SET Libelle = '".$Libelle."', Description = '".$Description."', Prix = '".$Prix."', LogoAdress = '".$Logo."' 
+		        WHERE id = ".$idAnnonce." ";
+		PdoGsb::$monPdo->exec($req);
+	}
+	
+	public function getLogin ($Login) {
+		$req = " Select login from userdata Where login = '".$Login."'";
+		$rs = PdoGsb::$monPdo->query($req);	
+		$resultat = null;
+		while ($ligne = $rs->fetch()){
+			   $resultat[]=$ligne;
+		}
+	    return $resultat;
+	}
+	
     
  }
 	

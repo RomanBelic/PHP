@@ -25,7 +25,7 @@
 <form>
    
 	<fieldset>
-	<table>
+	<table style="font-size:12px">
     <legend>Bienvenue, <?php if($UserType==1) {echo $Nom;} else {echo $Nom." ".$Prenom;}  ?> </legend>
 	<tr>
 	<td align="center">

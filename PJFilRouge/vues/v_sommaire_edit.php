@@ -17,7 +17,7 @@
 <form action="index.php?uc=profil&action=valider_profil" method="post" ENCTYPE="multipart/form-data">
    
 	<fieldset>
-	<table align="center">
+	<table align="center" style="font-size:12px">
     <legend>Modification du profil</legend>
     <tr>
 	<td colspan="2" align="center">

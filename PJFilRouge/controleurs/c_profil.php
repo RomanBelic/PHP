@@ -39,6 +39,7 @@ switch($action){
 	}
 	case 'createProfil':{
 		$Fname = "";
+		$Errmsg = "";
 		$win = 1;
 		$err = 0;
 		if (ISSET($_POST['login']) && ISSET($_POST['mdp'])){
@@ -50,24 +51,30 @@ switch($action){
 											 date("Y-m-d"), $Fname, $_POST['login'], $_POST['mdp']
 											 );
 			}
-			else $err = 1;
+			else {
+				$err = 1;
+				$Errmsg = "Entrez un login et mot de passe";
+			}
+			if (loginExists($_POST['login'])) {
+				$err = 1;
+				$Errmsg = "Ce login existe deja";
+			}
 		}
-		else $err = 1;
+		else {
+			$err = 1;
+			$Errmsg = "Entrez un login et mot de passe";
+		}
 		
 		if ($err == 1) {
 			$types = $pdo -> getUserTypes ();	
-			ajouterErreur("Entrez un login et mot de passe");
+			ajouterErreur($Errmsg);
 			include("vues/v_sommaire.php");
 		    include("vues/v_erreurs.php");
 			include("vues/v_newUser.php");
-			echo 'test fail';
 		}
 		
 		if ($err == 0) {
 		header ("Location:index.php?uc=connexion&action=demandeConnexion");	
-		echo 'test';
-		echo $_POST['login'];
-			
 		}
 		break;
 	}

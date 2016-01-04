@@ -20,14 +20,13 @@ echo
     </tr>
 </table>
 </form>
-
-
 ';
 echo '
 <div id="contenu">
 <table style="margin-left:27%;">' ;
 if ($annonceDetails != Null) {
 	$i = 0;
+	$editArea  = "";
 	foreach  ($annonceDetails as $key=>$unInfo)
 				{
 					$idAnnonce = $unInfo['idAnnonce'];
@@ -44,7 +43,17 @@ if ($annonceDetails != Null) {
 				    $Date = dateAnglaisVersFrancais ($Date);
 					if ($LogoAdress == Null)
 					    $LogoAdress = "unknown.jpg";
-		
+						
+					if (ISSET($_SESSION['params'])){
+						if ($_SESSION['params']['Id'] == $idUser)
+						{
+						    $editArea = '<td colspan ="2" style="font-size:12px;border-right:none">
+					        <a href = "index.php?uc=Annonces&action=modAnnonce&id='.$idAnnonce.'">Modifier l\'annonce</a></td>';
+						}
+						else {
+							$editArea = '<td style="padding:8px;border-left:none;border-right:none;"></td>';
+						}
+					}
 					$i++;
 					
 					echo '
@@ -53,14 +62,15 @@ if ($annonceDetails != Null) {
 						                <td style="text-align:center">Par '.$Nom.' '.$Prenom.' </td>
 					</tr>
 					<tr style="font-size:12px;" >
-					    <td><img src="./logosAnnonce/'.$LogoAdress.'"  style="width:96px;height:64px;"></td>
+					    <td><img src="./logosAnnonce/'.$LogoAdress.'"  style="width:96px;height:64px;border:0;"></td>
 						<td colspan="3" width="300px">
 						    <p style="line-height:0;">Offre de : '.$UserLibelle.'</p>
        						<p style="line-height:0;padding-top:5px;">Description : '.$Description.'</p>
 						    <p style="line-height:0;padding-top:5px;">Prix estimee : '.$Prix.' $</p>          
 						</td>
 					</tr>
-				    <tr><td align="center" style="border-right:0;border-left:0;padding:10px"></td></tr>
+				    <tr>'.$editArea.'
+					</tr>
 				';	
 				}
 

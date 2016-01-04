@@ -199,6 +199,18 @@ function nbErreurs(){
 	}
 }
 
+function loginExists ($Login) {
+    $pdo = PdoGsb::getPdoGsb();
+	$logarray = $pdo -> getLogin ($Login);
+	if ($logarray != Null)
+		return true;
+	else
+		return false;
+}
+
+
+
+
 
 
 ?>
